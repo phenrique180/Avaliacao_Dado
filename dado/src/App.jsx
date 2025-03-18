@@ -9,8 +9,16 @@ import './App.css'
 
 
 function App() { 
-  const [icons, setIcons] = useState([<FaDiceOne />, <FaDiceTwo />, <FaDiceThree />, <FaDiceFour />, <FaDiceFive />, <FaDiceSix />])
-  const [icon, setIcon] = useState()
+  const icons = [ 
+    { componente: <FaDiceOne />, nome: "Dado: 1" },
+    { componente: <FaDiceTwo />, nome: "Dado: 2" },
+    { componente: <FaDiceThree />, nome: "Dado: 3" },
+    { componente: <FaDiceFour />, nome: "Dado: 4" },
+    { componente: <FaDiceFive />, nome: "Dado: 5" },
+    { componente: <FaDiceSix />, nome: "Dado: 6" }
+  ];
+  const [icon, setIcon] = useState(null)
+  const [mensagem, setMensagem] = useState("")
 
   const [contadorClique, setContadorClique] = useState(0);
   
@@ -19,6 +27,7 @@ function App() {
 
     let n = Math.floor(Math.random() * icons.length)
     setIcon(icons[n])
+    setMensagem(icons[n].nome)
     setContadorClique(prevCount => prevCount + 1);
   }
   
@@ -28,7 +37,8 @@ function App() {
       <div className='container-app'>
         <h1>Gerador de D6</h1>
         <button onClick={sortearDado}>Clique aqui</button>
-        <h2 className='icon'>{icon}</h2>
+        <h2 className='icon'>{icon?.componente}</h2>
+        {icon && <p>{icon.nome}</p>}
         <p>Dados gerados: {contadorClique}</p>
         
     </div>
